@@ -12,7 +12,7 @@ def event_stream():
     while True:
         msg = consumer.receive()
         consumer.acknowledge(msg)
-        yield ("data: {}\n".format(msg.data(), msg.message_id()))
+        yield (f"data: {msg.data()}\n")
 
 
 @app.route('/stream')
