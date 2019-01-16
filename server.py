@@ -9,7 +9,7 @@ client = pulsar.Client('pulsar://localhost:6650')
 
 def event_stream():
     print("START STREAM")
-    consumer = client.subscribe('my-topic', 'my-subscription')
+    consumer = client.subscribe('*', 'my-subscription')
     while True:
         msg = consumer.receive()
         print(f"RECEIVED: {msg}")
