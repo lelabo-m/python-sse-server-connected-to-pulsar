@@ -14,7 +14,11 @@ def event_stream():
         msg = consumer.receive()
         print(f"RECEIVED: {msg}")
         consumer.acknowledge(msg)
-        yield ("Received message '{}' id='{}'".format(msg.data(), msg.message_id()))
+        # yield ("Received message '{}' id='{}'".format(msg.data(), msg.message_id()))
+        out = 'event: message\n'
+        out += 'data: %s\n' % msg.data()
+        out += '\n'
+        yield(out)
 
 
 @app.route('/stream')
