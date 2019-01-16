@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import flask
 import pulsar
-
+import re
 
 app = flask.Flask(__name__)
 client = pulsar.Client('pulsar://localhost:6650')
@@ -9,7 +9,7 @@ client = pulsar.Client('pulsar://localhost:6650')
 
 def event_stream():
     print("START STREAM")
-    consumer = client.subscribe('*', 'my-subscription')
+    consumer = client.subscribe(re.compile('.*'), 'my-subscription')
     while True:
         msg = consumer.receive()
         print(f"RECEIVED: {msg}")
