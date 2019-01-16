@@ -7,6 +7,7 @@ app = flask.Flask(__name__)
 client = pulsar.Client('pulsar://localhost:6650')
 
 def event_stream():
+    print("START STREAM")
     consumer = client.subscribe('my-topic', 'my-subscription')
     while True:
         msg = consumer.receive()
@@ -16,11 +17,13 @@ def event_stream():
 
 @app.route('/stream')
 def stream():
+    print("ROUTE STREAM")
     return flask.Response(event_stream(), mimetype="text/event-stream")
 
 
 @app.route('/')
 def home():
+    print("ROUTE HOME")
     return "Hello World"
 
 
